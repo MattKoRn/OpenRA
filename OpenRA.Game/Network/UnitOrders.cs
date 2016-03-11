@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using OpenRA;
 using OpenRA.Traits;
 
 namespace OpenRA.Network
@@ -266,6 +267,11 @@ namespace OpenRA.Network
 						break;
 					}
 
+				case "GenerateMap":
+					{
+						Game.GenerateLobbyMap();
+						break;
+					}
 				case "Ping":
 					{
 						orderManager.IssueOrder(Order.Pong(order.TargetString));
