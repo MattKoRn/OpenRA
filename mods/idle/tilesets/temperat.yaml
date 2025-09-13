@@ -1,0 +1,20 @@
+General:
+	Extensions: .tmp, .tem
+	DefaultTileSize: 24,24
+	EditorTemplateOrder: ClearTile
+
+Terrain:
+	TerrainType@Clear:
+		Type: Clear
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+	TerrainType@Rough:
+		Type: Rough
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+	TerrainType@Road:
+		Type: Road
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+
+Templates:

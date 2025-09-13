@@ -1,0 +1,23 @@
+^BaseWorld:
+	ActorMap:
+	ScreenMap:
+	Selection:
+	MusicPlaylist:
+	DebugVisualizations:
+	IdleGameLogic:
+		InitialResources: 100
+		ResourcesPerSecond: 1
+	Viewport:
+
+World:
+	Inherits: ^BaseWorld
+	LuaScript:
+	MapOptions:
+	MapBuildRadius:
+	MapCreeps:
+	PathfindingLayer@normal:
+		Name: normal
+		TerrainSpeedModifier: normal
+	PathfindingLayer@naval:
+		Name: naval
+		TerrainSpeedModifier: naval

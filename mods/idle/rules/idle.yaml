@@ -1,0 +1,21 @@
+ResourceGenerator:
+	Health:
+		HP: 1000
+	IdleResourceGenerator:
+		ResourceType: cash
+		GenerationRate: 10
+		UpgradeCost: 100
+		UpgradeMultiplier: 1.5
+	RenderSprites:
+		Image: generator
+
+ClickBooster:
+	Health:
+		HP: 1000
+	IdleClickBooster:
+		ResourceType: cash
+		ClickValue: 50
+		UpgradeCost: 500
+		UpgradeMultiplier: 2.0
+	RenderSprites:
+		Image: booster

@@ -1,0 +1,36 @@
+MapFormat: 12
+
+RequiresMod: idle
+
+Title: Idle Game
+
+Author: OpenRA Idle Mod
+
+Tileset: TEMPERAT
+
+MapSize: 20,20
+
+Bounds: 1,1,18,18
+
+Visibility: Lobby
+
+Categories: Custom
+
+Players:
+	PlayerReference@Neutral:
+		Name: Neutral
+		OwnsWorld: True
+		NonCombatant: True
+		Faction: neutral
+	PlayerReference@Player:
+		Name: Player
+		Playable: True
+		Faction: neutral
+
+Actors:
+
+Rules:
+
+Smudges:
+
+Options:
