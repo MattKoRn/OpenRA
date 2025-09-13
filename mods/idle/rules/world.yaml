@@ -1,0 +1,17 @@
+^BaseWorld:
+	ActorMap:
+	ScreenMap:
+	Selection:
+	MusicPlaylist:
+	DebugVisualizations:
+	IdleGameLogic:
+		InitialResources: 100
+		BaseResourcesPerSecond: 1
+
+World:
+	Inherits: ^BaseWorld
+	LuaScript:
+	MapOptions:
+	MapBuildRadius:
+	MapCreeps:
+	SpawnMapActors:

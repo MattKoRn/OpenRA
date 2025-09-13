@@ -1,0 +1,11 @@
+ui:
+	start: ui.png
+		Start: 0,0,32,32
+
+generator:
+	idle: generator.png
+		idle: 0,0,64,64
+
+booster:
+	idle: booster.png
+		idle: 0,0,64,64

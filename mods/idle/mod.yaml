@@ -1,0 +1,112 @@
+Metadata:
+	Title: Idle Game
+	Version: {DEV_VERSION}
+	Website: https://www.openra.net
+	WindowTitle: OpenRA Idle Game
+
+FileSystem: DefaultFileSystem
+	Packages:
+		^EngineDir
+		$idle: idle
+		^EngineDir|mods/common: common
+
+MapFolders:
+	idle|maps: System
+
+Rules:
+	idle|rules/world.yaml
+	idle|rules/player.yaml
+	idle|rules/idle.yaml
+
+Sequences:
+	idle|sequences/ui.yaml
+
+TileSets:
+	idle|tilesets/temperat.yaml
+
+Cursors:
+	idle|cursors.yaml
+
+Chrome:
+	idle|chrome.yaml
+
+Assemblies: OpenRA.Mods.Common.dll, OpenRA.Mods.Cnc.dll
+
+ChromeLayout:
+
+FluentMessages:
+
+Weapons:
+
+Voices:
+
+Notifications:
+
+Music:
+
+Hotkeys:
+
+LoadScreen: BlankLoadScreen
+
+ServerTraits:
+	LobbyCommands
+
+ChromeMetrics:
+	common|metrics.yaml
+	idle|metrics.yaml
+
+Fonts:
+	Tiny:
+		Font: common|FreeSans.ttf
+		Size: 10
+		Ascender: 8
+	TinyBold:
+		Font: common|FreeSansBold.ttf
+		Size: 10
+		Ascender: 8
+	Small:
+		Font: common|FreeSans.ttf
+		Size: 12
+		Ascender: 9
+	Regular:
+		Font: common|FreeSans.ttf
+		Size: 14
+		Ascender: 11
+	Bold:
+		Font: common|FreeSansBold.ttf
+		Size: 14
+		Ascender: 11
+	MediumBold:
+		Font: common|FreeSansBold.ttf
+		Size: 18
+		Ascender: 14
+	BigBold:
+		Font: common|FreeSansBold.ttf
+		Size: 24
+		Ascender: 18
+
+MapGrid:
+	Type: Rectangular
+
+DefaultOrderGenerator: IdleOrderGenerator
+
+SupportsMapsFrom: idle
+
+SoundFormats: Wav
+
+SpriteFormats: ShpD2, ShpTD, TmpRA, TmpTD, ShpTS
+
+TerrainFormat: DefaultTerrain
+
+SpriteSequenceFormat: DefaultSpriteSequence
+
+GameSpeeds:
+	DefaultSpeed: default
+	Speeds:
+		default:
+			Name: Normal
+			Timestep: 40
+			OrderLatency: 1
+
+DiscordService:
+	ApplicationId: 699222659766026240

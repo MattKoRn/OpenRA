@@ -1,0 +1,10 @@
+^BasePlayer:
+	PlayerResources:
+		Resources: 100
+		ResourceCapacity: 100000
+
+Player:
+	Inherits: ^BasePlayer
+	TechTree:
+	IdlePlayerLogic:
+	PlayerStatistics:

@@ -1,0 +1,66 @@
+Container@IDLE_GAME_ROOT:
+	Logic: IdleGameWidget
+	Width: WINDOW_RIGHT
+	Height: WINDOW_BOTTOM
+	Children:
+		Container@RESOURCE_DISPLAY:
+			X: 10
+			Y: 10
+			Width: 300
+			Height: 60
+			Children:
+				Label@RESOURCES_LABEL:
+					Text: Resources: 
+					Font: Bold
+					Width: 150
+					Height: 25
+				Label@RESOURCES_VALUE:
+					X: 150
+					Text: 0
+					Font: Bold
+					Width: 150
+					Height: 25
+		Container@GENERATORS:
+			X: 10
+			Y: 80
+			Width: 400
+			Height: 200
+			Children:
+				Label@GENERATORS_TITLE:
+					Text: Resource Generators
+					Font: Bold
+					Width: 400
+					Height: 30
+				Container@GENERATOR_1:
+					Y: 40
+					Width: 400
+					Height: 60
+					Children:
+						Label@GEN1_NAME:
+							Text: Basic Generator
+							Font: Regular
+							Width: 200
+							Height: 25
+						Label@GEN1_COUNT:
+							X: 200
+							Text: Count: 0
+							Font: Regular
+							Width: 100
+							Height: 25
+						Button@GEN1_BUY:
+							X: 300
+							Text: Buy (100)
+							Font: Regular
+							Width: 100
+							Height: 25
+		Container@CLICK_AREA:
+			X: 500
+			Y: 80
+			Width: 200
+			Height: 200
+			Children:
+				Button@CLICK_BUTTON:
+					Text: CLICK!
+					Font: BigBold
+					Width: 200
+					Height: 200

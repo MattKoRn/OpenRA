@@ -4,6 +4,7 @@
 		ResourceValues:
 			Ore: 25
 			Gems: 50
+	IdlePlayerLogic:
 
 EditorPlayer:
 	Inherits: ^BasePlayer
