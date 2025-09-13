@@ -9,6 +9,9 @@
 		DefeatMusic: map
 	TerrainGeometryOverlay:
 	DebugVisualizations:
+	IdleGameLogic:
+		InitialResources: 100
+		BaseResourcesPerSecond: 1
 	Locomotor@FOOT:
 		Name: foot
 		Crushes: mine, crate

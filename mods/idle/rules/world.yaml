@@ -6,8 +6,7 @@
 	DebugVisualizations:
 	IdleGameLogic:
 		InitialResources: 100
-		ResourcesPerSecond: 1
-	Viewport:
+		BaseResourcesPerSecond: 1
 
 World:
 	Inherits: ^BaseWorld
@@ -15,9 +14,4 @@ World:
 	MapOptions:
 	MapBuildRadius:
 	MapCreeps:
-	PathfindingLayer@normal:
-		Name: normal
-		TerrainSpeedModifier: normal
-	PathfindingLayer@naval:
-		Name: naval
-		TerrainSpeedModifier: naval
+	SpawnMapActors:

@@ -8,13 +8,13 @@ Terrain:
 		Type: Clear
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
-	TerrainType@Rough:
-		Type: Rough
-		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
-	TerrainType@Road:
-		Type: Road
-		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
 
 Templates:
+	Template@0:
+		Id: 0
+		Images: clear.tmp
+		Size: 1,1
+		Frames: 1
+		Categories: Terrain
+		Tiles:
+			0: Clear

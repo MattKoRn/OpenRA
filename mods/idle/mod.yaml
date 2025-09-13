@@ -5,7 +5,7 @@ Metadata:
 	WindowTitle: OpenRA Idle Game
 
 FileSystem: DefaultFileSystem
-	SystemPackages:
+	Packages:
 		^EngineDir
 		$idle: idle
 		^EngineDir|mods/common: common
@@ -45,7 +45,6 @@ Notifications:
 Music:
 
 Hotkeys:
-	idle|hotkeys.yaml
 
 LoadScreen: BlankLoadScreen
 
