@@ -1,0 +1,105 @@
+name: OpenKrush Intelligence Build
+
+on:
+  push:
+    branches:
+      - ci/openkrush-intelligence-20260729
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out build payload
+        uses: actions/checkout@v4
+
+      - name: Install .NET 6 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Reconstruct and verify code patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 --decode ci-openkrush/openkrush_changes.patch.xz.b64 > /tmp/openkrush_changes.patch.xz
+          echo "a97ca7b98c016368d4633e528357b0ed04f39cd571ad45b13511d494cf2accf5  /tmp/openkrush_changes.patch.xz" | sha256sum --check
+          xz --decompress --stdout /tmp/openkrush_changes.patch.xz > /tmp/openkrush_changes.patch
+          echo "2443ad485e06af8fa0ae4b0104fa1c11506be920e4271f1701c601c517213f66  /tmp/openkrush_changes.patch" | sha256sum --check
+
+      - name: Recreate uploaded project and pinned engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone https://github.com/IceReaper/OpenKrush.git work
+          git -C work checkout effd250aa36109854b151af67b2d492acfbec854e
+          git -C work apply --check /tmp/openkrush_changes.patch
+          git -C work apply /tmp/openkrush_changes.patch
+          rm -rf work/engine
+          git clone https://github.com/OpenRA/OpenRA.git work/engine
+          git -C work/engine checkout 721b225b5465922b6705e262d26a58306cc50bd1
+          printf '%s\n' 721b225b5465922b6705e262d26a58306cc50bd1 > work/engine/VERSION
+
+      - name: Build pinned OpenRA engine
+        shell: bash
+        run: |
+          set -o pipefail
+          make -C work/engine RUNTIME=net6 TARGETPLATFORM=linux-x64 all 2>&1 | tee engine-build.log
+
+      - name: Build modified OpenKrush game
+        shell: bash
+        run: |
+          set -o pipefail
+          dotnet build work/OpenKrush.sln -c Release -p:TargetPlatform=linux-x64 --nologo 2>&1 | tee mod-build.log
+
+      - name: Run AI and RPG deterministic self-tests
+        shell: bash
+        working-directory: work
+        run: |
+          set -o pipefail
+          ./utility.sh --check-ai 2>&1 | tee ../ai-selftest.log
+          ./utility.sh --check-rpg 2>&1 | tee ../rpg-selftest.log
+
+      - name: Package compiled output
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p compiled-output/engine
+          cp -a work/engine/bin compiled-output/engine/
+          cp -a work/OpenRA.Mods.OpenKrush/obj compiled-output/OpenRA.Mods.OpenKrush-obj
+          cp engine-build.log mod-build.log ai-selftest.log rpg-selftest.log compiled-output/
+          {
+            echo '# CI Build Report'
+            echo
+            echo '- Uploaded project base: `effd250aa36109854b151af67b2d492acfbec854e`'
+            echo '- Engine commit: `721b225b5465922b6705e262d26a58306cc50bd1`'
+            echo '- Configuration: Release'
+            echo '- Target platform: linux-x64'
+            echo '- AI self-test: passed'
+            echo '- RPG self-test: passed'
+            echo '- Applied patch SHA-256: `2443ad485e06af8fa0ae4b0104fa1c11506be920e4271f1701c601c517213f66`'
+          } > compiled-output/BUILD_REPORT.md
+          (cd compiled-output && zip -qr ../OpenKrush-compiled-output.zip .)
+
+      - name: Upload compiled output
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenKrush-compiled-output
+          path: OpenKrush-compiled-output.zip
+          if-no-files-found: error
+
+      - name: Upload build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenKrush-build-diagnostics
+          path: |
+            engine-build.log
+            mod-build.log
+            ai-selftest.log
+            rpg-selftest.log
+          if-no-files-found: ignore
